@@ -2,8 +2,8 @@ class LinkedList {
   constructor(value) {
     let node = this.createNode(value)
     this.list = node,
-    this.head = null,
-    this.tail = null
+    this.head = node,
+    this.tail = node
   }
 
   createNode(value) {
@@ -16,22 +16,40 @@ class LinkedList {
   }
 
   removeHead() {
-
-
+    let oldHead = this.head;
+    this.head = this.head.next;
+    return oldHead;
   }
 
   removeTail() {
-
+    let oldTail = this.tail;
+    this.tail = this.tail.prev;
+    return oldTail;
   }
 
   addTail(value) {
     let node = this.createNode(value);
-
+    this.tail.next = node;
+    node.prev = this.tail;
+    this.tail = node;
+    return this.tail;
   }
 
-  addHead() {
-    
+  addHead(value) {
+    let node = this.createNode(value);
+    this.head.prev = node;
+    node.next = this.head;
+    this.head = node;
+    return this.head;
   }
-
-
 }
+
+
+let list = new LinkedList('enoch');
+list.addTail('sara');
+list.addHead('Dale');
+
+console.log(list.head)
+
+
+

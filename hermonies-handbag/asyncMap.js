@@ -40,14 +40,63 @@
 
 
 var asyncMap = function(tasks, callback) {
-  // we have to invoke the first function in the array
-    //wait until we get a response before moving on to the next function - async
-  // what is the callback doing? - logging out the array at the end of the map
-  // can we use promises to keep this async..?  
+  // I: array of async functions, and callback functiom
+  // O: array - results of our callback function - results in order
+  // C: must maintain order
+  // E: none
 
+  //declare results array
+  // iterate through tasks
+    // invoke task with custom cb
+      // store result of cb at correct spot in results array
+      // increment resultsCount
+      // if resultsCount matches number of tasks
+        // call callback on resultsArray
 
-  // start with a new promise function that loops through the tasks,
-    //promisify the first task in the array and invoke,
-    // chain it to the next task
-  // when the loop is down chain task to the callback?
+  let results = [];
+  let counter = 0;
+  
+  tasks.forEach((task, index) => {
+    task((data) => {
+      results[index] = data;
+      if (++counter === tasks.length) {
+        callback(results);
+      }
+    })
+  })
+
 };
+
+
+
+asyncMap([
+  function(cb){
+    setTimeout(function(){
+      cb('one');
+    }, 200);
+  },
+  function(cb){
+    setTimeout(function(){
+      cb('two');
+    }, 100);
+  }
+ ],
+  function(results){
+    // the results array will equal ['one','two'] even though
+    // the second function had a shorter timeout.
+    console.log(results); // ['one', 'two']
+ });
+
+
+
+
+
+
+
+
+
+
+
+
+
+

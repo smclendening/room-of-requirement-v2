@@ -55,7 +55,7 @@ var asyncMap = function(tasks, callback) {
 
   let results = [];
   let counter = 0;
-  
+
   tasks.forEach((task, index) => {
     task((data) => {
       results[index] = data;
@@ -64,7 +64,13 @@ var asyncMap = function(tasks, callback) {
       }
     })
   })
+  
+// DONE WITH PROMISES
 
+// Promise.all(tasks.map((task) => new Promise(task)))
+//   .then((value) => {
+//     callback(value)
+//   })
 };
 
 

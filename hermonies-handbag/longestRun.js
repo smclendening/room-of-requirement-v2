@@ -15,6 +15,9 @@
 
 var longestRun = function (string) {
   // TODO: Your code here!
+  if (typeof string !== 'string' || string.length === 0) {
+    return null;
+  }
 
   let currentStart = 0;
   let currentEnd = 0;
@@ -54,7 +57,9 @@ var longestRun = function (string) {
 
 };
 
-console.log(longestRun('aabbbcccc'))
+console.log(longestRun('aabbbcccc'));
+console.log(longestRun(''));
+console.log(longestRun([1, 2, 3]));
 
 // If you need a random string generator, use this!
 // (you wont need this function for your solution but it may help with testing)

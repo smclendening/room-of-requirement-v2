@@ -15,7 +15,46 @@
 
 var longestRun = function (string) {
   // TODO: Your code here!
+
+  let currentStart = 0;
+  let currentEnd = 0;
+
+
+  let longestStart = 0;
+  let longestEnd = 0;
+
+
+  for (let i = 1; i < string.length; i++) {
+    if (string[i-1] === string[i]) {
+      currentEnd++;
+    }
+    if(string[i-1] !== string[i] || (string[i+1] === undefined)) {
+      let longestLength = longestEnd - longestStart;
+      let currentLength = currentEnd - currentStart;
+      if (currentLength > longestLength) {
+        longestStart = currentStart;
+        longestEnd = currentEnd;
+        currentStart = i;
+        currentEnd = i;
+      }
+    }
+  }
+
+  return [longestStart, longestEnd];
+
+  // keep track of current run
+    //start of current run
+    // end of currnet run
+  // keep track of longest run
+    // start of longest run
+    // end of longest run
+
+  // if next character is different
+    // compare longest run with current run for new longest run value
+
 };
+
+console.log(longestRun('aabbbcccc'))
 
 // If you need a random string generator, use this!
 // (you wont need this function for your solution but it may help with testing)
@@ -28,4 +67,4 @@ var randomString = function (len) {
   }
 
   return text;
-};
+};  

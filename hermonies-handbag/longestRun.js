@@ -14,6 +14,7 @@
  */
 
 var longestRun = function (string) {
+  console.log(string);
   // TODO: Your code here!
   if (typeof string !== 'string' || string.length === 0) {
     return null;
@@ -27,23 +28,40 @@ var longestRun = function (string) {
   let longestEnd = 0;
 
 
-  for (let i = 1; i < string.length; i++) {
+    for (let i = 1; i < string.length; i++) {
     if (string[i-1] === string[i]) {
       currentEnd++;
-    }
-    if(string[i-1] !== string[i] || (string[i+1] === undefined)) {
+
       let longestLength = longestEnd - longestStart;
       let currentLength = currentEnd - currentStart;
       if (currentLength > longestLength) {
         longestStart = currentStart;
         longestEnd = currentEnd;
-        currentStart = i;
-        currentEnd = i;
       }
+    } else {
+      currentStart = i;
+      currentEnd = i;
     }
   }
 
   return [longestStart, longestEnd];
+
+  //order of operations is wrong - i shoudl be checking length if characters are the same and reseting if they are not
+  //   for (let i = 1; i < string.length; i++) {
+  //   if (string[i-1] === string[i]) {
+  //     currentEnd++;
+  //   }
+  //   if(string[i-1] !== string[i] || (string[i+1] === undefined)) {
+  //     let longestLength = longestEnd - longestStart;
+  //     let currentLength = currentEnd - currentStart;
+  //     if (currentLength > longestLength) {
+  //       longestStart = currentStart;
+  //       longestEnd = currentEnd;
+  //       currentStart = i;
+  //       currentEnd = i;
+  //     }
+  //   }
+  // }
 
   // keep track of current run
     //start of current run
@@ -57,9 +75,8 @@ var longestRun = function (string) {
 
 };
 
-console.log(longestRun('aabbbcccc'));
-console.log(longestRun(''));
-console.log(longestRun([1, 2, 3]));
+
+
 
 // If you need a random string generator, use this!
 // (you wont need this function for your solution but it may help with testing)
@@ -72,4 +89,10 @@ var randomString = function (len) {
   }
 
   return text;
-};  
+}; 
+
+console.log(longestRun('abbbbccdddddddd'));
+console.log(longestRun(randomString(8)));
+
+
+

@@ -96,49 +96,6 @@
  */
 
 
-
-var mergeSort = function(array) {
-  // Your code here.
-  let results = [];
-  //make sub-arrays
-  array.forEach((num) => {
-    results.push([num]);
-  })
-
-
-  let merge = (array1, array2) => {
-    let i = 0;
-    let j = 0;
-    let result = [];
-
-    while (i < array1.length && j < array2.length) {
-      if (array1[i] === array2[j]) {
-        result.push(array1[i]);
-        result.push(array2[j]);
-      } else if (array1[i] < array2[j]) {
-        result.push(array1[i]);
-        i++;
-      } else {
-        result.push(array2[j]);
-        j++;
-      }
-    }
-
-    return result;
-  }
-
-
-
-  return results;
-};
-
-
-console.log(mergeSort([4,7,4,3,9,1,2]));
-
-
-/*
-Merge function of sorted arrays
-
 let merge = (array1, array2) => {
   let i = 0;
   let j = 0;
@@ -148,6 +105,8 @@ let merge = (array1, array2) => {
     if (array1[i] === array2[j]) {
       result.push(array1[i]);
       result.push(array2[j]);
+      i++;
+      j++;
     } else if (array1[i] < array2[j]) {
       result.push(array1[i]);
       i++;
@@ -157,10 +116,33 @@ let merge = (array1, array2) => {
     }
   }
 
-  return result;
+  let remainder = i === array1.length ? array2.slice(j) : array1.slice(i);
+
+  return result.concat(remainder);
 }
 
-console.log(merge([3, 27, 38, 43], [9, 10, 82]));
-*/
+
+let mergeSort = function(array) {
+  // Your code here.
+
+  //base case
+  if (array.length <= 1) {
+    return array;
+  }
+
+  //split array into half;
+  let midpoint = Math.floor(array.length/2);
+  let leftHalf = array.slice(0, midpoint);
+  let rightHalf = array.slice(midpoint);
+
+
+  return merge(mergeSort(leftHalf), mergeSort(rightHalf));
+
+};
+
+
+console.log(mergeSort([4,7,4,3,9,1,2]));
+
+
 
 

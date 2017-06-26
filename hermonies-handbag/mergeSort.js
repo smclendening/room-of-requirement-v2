@@ -122,7 +122,7 @@ let merge = (array1, array2) => {
 }
 
 
-let mergeSort = function(array) {
+let mergeSortRecursive = function(array) {
   // Your code here.
 
   //base case
@@ -136,13 +136,40 @@ let mergeSort = function(array) {
   let rightHalf = array.slice(midpoint);
 
 
-  return merge(mergeSort(leftHalf), mergeSort(rightHalf));
+  return merge(mergeSortRecursive(leftHalf), mergeSortRecursive(rightHalf));
 
 };
 
+let mergeSortIterative = function(array) {
+  // split input array into subarrays 
+  let splitArray = array.map((index) => {
+    return [index];
+  })
 
-console.log(mergeSort([4,7,4,3,9,1,2]));
+  // while we still have subarrays
 
+  while(splitArray.length > 1) {
+    let mergeResult = [];
+
+    for(let i = 0; i < splitArray.length; i+=2) {
+      //merge subarrays
+      if (splitArray[i + 1]) {
+        mergeResult.push(merge(splitArray[i], splitArray[i+1]))
+      } else {
+        mergeResult.push(splitArray[i]);
+      }
+    }
+
+    //reset splitArray to merged arrays
+    splitArray = mergeResult;
+  }
+
+  return splitArray[0];
+}
+
+
+console.log(mergeSortRecursive([4,7,4,3,9,1,2]));
+console.log(mergeSortIterative([4,7,4,3,9,1,2]));
 
 
 

@@ -29,6 +29,10 @@ let getLastName = function (name) {
   })
 }
 
+let newVersion = function(name) {
+  return name + ' 2.0';
+}
+
 
 getFirstName
   .then((firstName) => {
@@ -41,5 +45,9 @@ getFirstName
   })
   .then((wholeName) => {
     console.log(wholeName);
+    return newVersion(wholeName);
+  })
+  .then((result) => {
+    console.log(result);
   })
 

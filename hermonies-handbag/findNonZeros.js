@@ -19,27 +19,49 @@ Edge Cases:
 */
 
 var findNonZero = (array) => {
-  let frontCount = 0;
   let backCount = array.length - 1;
+  let count = 0;
   
   for(let i =0; i < array.length; i++) {
     // if array[frontCount] === 0, we want to bring the zero to the end of the array
     // array[backCount] !==0, we want to bring the non zero number to the front of the array
     // we only want to swap in this case
+    
+    
 
-    if (array[frontCount] === 0 && array[backCount] !== 0) {
+    if (array[i] === 0 && array[backCount] !== 0 && i < backCount) {
+      console.log(i);
       let temp = array[backCount];
-      array[backCount] = array[frontCount];
-      array[frontCount] = temp;
+      array[backCount] = array[i];
+      array[i] = temp;
       backCount--;
-      frontCount++;
+      count++;
     }
+  }
+  
 
-    // if (array[i] !== 0) {
-    //   array[count] = array[i];
+  console.log(array, count, backCount);
+  
+  // backCount decrements each time there is a swap (when we encounter a zero)
+  // Since backCount
+  return array.length - count;
+}
+
+console.log(findNonZero([ 1, 0, 2, 0, 0, 3, 4]));
+
+/* 
+How can we write onto the array the least amount of times?
+
+var findNonZero = (array) => {
+  let count = 0;
+  let backCount = array.length - 1;
+  
+  for(let i =0; i < array.length; i++) {
+    if (array[i] !== 0) {
+      array[count] = array[i];
       
-    //   count++;
-    // }
+      count++;
+    }
   }
   
   let startIndex = count;
@@ -48,8 +70,9 @@ var findNonZero = (array) => {
     array[startIndex] = '?';
     startIndex++;
   }
-
-  console.log(array);
   
-  return frontCount;
+  return count;
 }
+*/
+
+console.log(findNonZero([ 1, 0, 2, 0, 0, 3, 4, 5 ]));

@@ -82,4 +82,3 @@ const rectangleIntersection = (rec1, rec2) => {
 
 const test = rectangleIntersection(testRec1, testRec2);
 
-console.log('test', test);

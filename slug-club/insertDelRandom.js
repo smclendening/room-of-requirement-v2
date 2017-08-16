@@ -2,7 +2,7 @@
  * Initialize your data structure here.
  */
 var RandomizedSet = function() {
-    this._storage = [];
+    this._hash = {};
     this._size = 0;
 };
 
@@ -13,15 +13,11 @@ var RandomizedSet = function() {
  */
 RandomizedSet.prototype.insert = function(val) {
     
-    for (let i = 0; i < this._storage.length; i++) {
-        const element = this._storage[i];
-        if (element === val) {
-            return false;
-        }
+    if (this._hash.hasOwnProperty(val)) {
+        return false;
     }
-    
-    this._storage.push(val);
     this._size++;
+    this._hash[val] = true;
     return true;
 };
 
@@ -31,15 +27,14 @@ RandomizedSet.prototype.insert = function(val) {
  * @return {boolean}
  */
 RandomizedSet.prototype.remove = function(val) {
-    for (let i = 0; i < this._storage.length; i++) {
-        const element = this._storage[i];
-        if (element === val) {
-            this._storage.splice(i, 1);
-            this._size--;
-            return true;
-        }
+    
+    if (!this._hash.hasOwnProperty(val)) {
+        return false;
     }
-    return false;
+    
+    delete this._hash[val];
+    this._size--;
+    return true;
 };
 
 /**
@@ -48,5 +43,13 @@ RandomizedSet.prototype.remove = function(val) {
  */
 RandomizedSet.prototype.getRandom = function() {
     const randomIndex = Math.floor(Math.random() * (this._size));
-    return this._storage[randomIndex];
+    return Number(Object.keys(this._hash)[randomIndex]);
 };
+
+/** 
+ * Your RandomizedSet object will be instantiated and called as such:
+ * var obj = Object.create(RandomizedSet).createNew()
+ * var param_1 = obj.insert(val)
+ * var param_2 = obj.remove(val)
+ * var param_3 = obj.getRandom()
+ */

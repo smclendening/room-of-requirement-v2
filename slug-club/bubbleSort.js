@@ -22,3 +22,5 @@ function bubbleSort(items) {
 
   return items;
 }
+
+// stop iterating if no swaps to be made

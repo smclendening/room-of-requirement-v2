@@ -10,11 +10,14 @@ function bubbleSort(items) {
       i, j, stop;
 
   for (i = 0; i < len; i++){
+      let swaps = 0;
       for (j = 0, stop = len - i; j < stop - 1; j++){
           if (items[j] > items[j + 1]){
               swap(j, j + 1);
+              swaps++;
           }
       }
+      if (swaps === 0) { break };
   }
 
   return items;

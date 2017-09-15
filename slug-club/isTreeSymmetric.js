@@ -12,6 +12,8 @@ function isTreeSymmetric(t) {
     let symmetric = true;
     
     const checkSymmetric = (node1, node2) => {
+        if (!symmetric) { return };
+        
         if (!node1 && !node2) {
             return;
         }

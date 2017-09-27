@@ -1,6 +1,7 @@
 var combinationSum = function(candidates, target) {
     const combos = [];
     const memo = {};
+    candidates = candidates.sort();
     
     const addNums = (currentSum, possibleNums, comboSoFar, startIndex) => {
         if (currentSum > target) {
@@ -8,7 +9,7 @@ var combinationSum = function(candidates, target) {
         }
         
         if (currentSum === target) {
-            comboSoFar = comboSoFar.sort();
+            //comboSoFar = comboSoFar.sort();
             if (!memo[comboSoFar]) {
                 combos.push(comboSoFar);
                 memo[comboSoFar] = true;
